@@ -1,0 +1,55 @@
+@startuml
+title Class Diagram Sistem Perbankan
+
+' Skema kelas Nasabah
+class Nasabah {
+  - id: String
+  - nama: String
+  - alamat: String
+  + bukaRekening(jenis: String): Rekening
+  + tutupRekening(noRek: String): void
+  + getRekening(): List<Rekening>
+}
+
+' Kelas abstrak Rekening
+abstract class Rekening {
+  - noRek: String
+  - saldo: double
+  - tanggalBuka: Date
+  # transaksiList: List<Transaksi>
+  + setor(jumlah: double): void
+  + tarik(jumlah: double): void
+  + getSaldo(): double
+  + getMutasi(): List<Transaksi>
+}
+
+' Subclass Tabungan
+class Tabungan {
+  - bunga: double
+  + hitungBunga(): double
+}
+
+' Subclass Giro
+class Giro {
+  - limitOverdraft: double
+  + cekOverdraft(): boolean
+}
+
+' Kelas Transaksi
+class Transaksi {
+  - idTransaksi: String
+  - tanggal: Date
+  - jumlah: double
+  - jenis: String <<Setor/Tarik>>
+  + getDetail(): String
+}
+
+' Pewarisan
+Rekening <|-- Tabungan
+Rekening <|-- Giro
+
+' Relasi antar kelas
+Nasabah "1" --> "*" Rekening : owns
+Rekening "1" --> "*" Transaksi : has
+
+@enduml

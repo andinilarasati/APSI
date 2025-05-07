@@ -1,0 +1,28 @@
+@startuml
+title DIAGRAM ACTIVITY PERBANKAN
+
+start
+
+:Nasabah memasukkan kartu ke Mesin ATM;
+:Verifikasi kartu;
+
+if (PIN valid?) then (Ya)
+  :Cek saldo;
+  :Masukkan jumlah penarikan;
+  :Keluar uang;
+  :Cetak struk;
+  stop
+else (Tidak)
+  :Tampilan muncul dan minta perulangan PIN;
+  repeat
+    :Masukkan PIN kembali;
+    :Validasi PIN;
+  repeat while (PIN salah?)
+  --> [PIN benar] :Cek saldo;
+  :Masukkan jumlah penarikan;
+  :Keluar uang;
+  :Cetak struk;
+  stop
+endif
+
+@enduml

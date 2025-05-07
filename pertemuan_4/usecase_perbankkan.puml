@@ -1,0 +1,27 @@
+@startuml
+title USE CASE DIAGRAM - SISTEM PERBANKAN
+
+actor Nasabah
+actor "Petugas Bank" as Petugas
+actor "Sistem Pihak Ketiga" as PihakKetiga
+
+rectangle "SISTEM PERBANKAN" {
+  usecase "Login" as UC1
+  usecase "Transfer Dana" as UC2
+  usecase "Pembayaran" as UC3
+  usecase "Blokir Kartu" as UC4
+  usecase "Autentikasi" as UC5
+}
+
+Nasabah --> UC1
+Nasabah --> UC2
+Nasabah --> UC3
+Petugas --> UC4
+PihakKetiga --> UC5
+
+UC1 --> UC5 : <<include>>
+UC2 --> UC5 : <<include>>
+UC3 --> UC5 : <<include>>
+UC4 --> UC5 : <<include>>
+
+@enduml
